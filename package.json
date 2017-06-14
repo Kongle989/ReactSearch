@@ -1,0 +1,30 @@
+{
+  "name": "reactsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel": "^6.23.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.6",
+    "morgan": "^1.8.2",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
+    "react-router": "^4.1.1",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/Kongle989/ReactSearch.git",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kongle989/ReactSearch/issues"
+  },
+  "homepage": "https://github.com/Kongle989/ReactSearch#readme"
+}
