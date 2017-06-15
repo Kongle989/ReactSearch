@@ -2,7 +2,6 @@ let express = require("express"),
     bodyParser = require("body-parser"),
     logger = require("morgan"),
     mongoose = require("mongoose"),
-    request = require("request"),
     app = express(),
     url = 'mongodb://localhost/nytreact';
 app.use(logger("dev"));
@@ -20,10 +19,6 @@ db.once("open", function () {
 });
 
 
-
-
-
-
-app.listen(process.env.PORT || 3000, function () {
+app.listen(3000, function () {
     console.log("App running");
 });

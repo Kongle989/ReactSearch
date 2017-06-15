@@ -1,25 +1,22 @@
-import { Router, Route, hashHistory } from 'react-router';
-
 // Include the React library
-let React = require("react"),
+let React = require("react");
 
+import {Route, BrowserRouter} from 'react-router-dom';
 // Reference the high-level components
-    Main = require("../components/Main"),
-    Search = require("../components/Search"),
-    Saved = require("../components/Saved");
+import Main from '../components/Main';
+import Search from '../components/Search';
+import Saved from '../components/Saved';
 
 // Export the Routes
 module.exports = (
 
     // The high level component is the Router component
-    <Router history={hashHistory}>
-        <Route path="/" component={Main}>
+    <BrowserRouter>
 
-            {/* If user selects Search or Saved show the appropriate component */}
-            <Route path="search" component={Search}/>
-            <Route path="saved" component={Saved}/>
-
-        </Route>
-    </Router>
+        <Main path="/">
+            <Search path="search"/>
+            <Saved path="saved"/>
+        </Main>
+    </BrowserRouter>
 
 );
