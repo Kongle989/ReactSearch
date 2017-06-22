@@ -18,7 +18,6 @@ db.once("open", function () {
     console.log("Mongoose connection successful.");
 });
 
-
 app.listen(3000, function () {
     console.log("App running");
 });
