@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export const helpers = {
+const helpers = {
     runQuery: (term, start, end) => {
 
         axios.get({
@@ -15,10 +15,12 @@ export const helpers = {
                 'fl': "web_url,headline,pub_date",
                 'page': 0
             },
-        }, function (err, response, body) {
-            body = JSON.parse(body);
-            return body;
+        }).then((response) => {
+            console.log(response);
+            return response.data.results.formatted;
         });
 
     }
 };
+
+export default helpers;

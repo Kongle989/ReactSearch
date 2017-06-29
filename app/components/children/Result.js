@@ -11,7 +11,7 @@ class Results extends React.Component {
             <div>
 
                     <h3>Results</h3>
-                    <p>{this.props.address}</p>
+                    <p>{this.props.articles}</p>
 
             </div>
         );

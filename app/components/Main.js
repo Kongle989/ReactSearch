@@ -9,17 +9,18 @@ export default class Main extends React.Component {
         super(props);
 
         this.state = {
-            searchTerm: "",
+            searchTerm: "Dog",
             startYear: "",
             endYear: "",
             results: ""
         };
 
         this.setTerm = this.setTerm.bind(this);
+        this.yell = this.yell.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        console.log('it did update');
         if (prevState.searchTerm !== this.state.searchTerm ||
             prevState.startYear !== this.state.startYear ||
             prevState.endYear !== this.state.endYear) {
@@ -45,13 +46,17 @@ export default class Main extends React.Component {
             startYear: start,
             endYear: end
         });
+        console.log('parent setterm');
     }
 
+    yell() {
+        console.log('AHHASHDAHSDN');
+    }
 
     render() {
         return (
             <div className="Main">
-
+                <h1>{this.state.searchTerm}</h1>
                 {this.props.children}
 
             </div>
