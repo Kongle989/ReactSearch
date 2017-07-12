@@ -1,27 +1,23 @@
 let React = require("react");
 
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import Main from '../components/Main';
 import Search from '../components/children/Search';
 import Saved from '../components/children/Saved';
 import Results from '../components/children/Result';
-console.log(Main.valueOf());
-// Export the Routes
+
 module.exports = (
-
     <BrowserRouter>
-
-        <Main path="/">
-            <h2>Hey</h2>
-            <Search path="search"
-                    setTerm={() => Main.setTerm}
-                    yell={ () => Main.yell}
-            />
-            <Saved path="saved"/>
-            {/*<Results path="results" articles={Main.state.results}/>*/}
-        </Main>
-
+        <Route path='/' component={Main}/>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/search">Search</Link></li>
+                <li><Link to="/saved">Saved</Link></li>
+                <li><Link to="/result">Result</Link></li>
+            </ul>
+            <Route path='/search' component={Search}/>
+            <Route path='/saved' component={Saved}/>
+            <Route path='/result' component={Results}/>
     </BrowserRouter>
-
 );

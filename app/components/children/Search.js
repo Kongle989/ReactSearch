@@ -1,4 +1,6 @@
 let React = require('react');
+import helpers from '../utils/helpers';
+import Form from 'grandchildren/Form';
 
 export default class Search extends React.Component {
     constructor(props) {
@@ -11,64 +13,45 @@ export default class Search extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        let newState = {};
-        newState[event.target.id] = event.target.value;
-        this.setState(newState);
-    }
-
-    componentDidUpdate() {
-        console.log(this.state)
+        this.setTerm = this.setTerm.bind(this);
 
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.setTerm(
-            this.state.term,
-            this.state.startDate,
-            this.state.endDate);
+    componentDidUpdate(prevProps, prevState) {
+        console.log('it did update');
+        if (prevState.searchTerm !== this.state.searchTerm ||
+            prevState.startYear !== this.state.startYear ||
+            prevState.endYear !== this.state.endYear) {
+            console.log("UPDATED");
+
+            helpers.runQuery(
+                this.state.searchTerm,
+                this.state.startYear,
+                this.state.endYear)
+                .then((data) => {
+                    if (data !== this.state.results) {
+                        console.log(data);
+
+                        this.setState({results: data});
+                    }
+                });
+        }
+    }
+
+    setTerm(term, start, end) {
         this.setState({
-            term: "",
-            startDate: "",
-            endDate: ""
-        });
-        console.log('child setterm');
-        this.props.yell();
+            term: term,
+            startDate: start,
+            endDate: end
+        })
     }
 
     render() {
         return (
             <div className="Search">
-                <form onSubmit={this.handleSubmit}>
-                    <label>Search</label>
-                    <input type="text"
-                           placeholder="Search for an article"
-                           id="term"
-                           value={this.state.term}
-                           onChange={this.handleChange}
-                           name="word"
-                           required/>
-                    <label>Start Year</label>
-                    <input type="text"
-                           placeholder="YYYY"
-                           id="startDate"
-                           value={this.state.startDate}
-                           onChange={this.handleChange}
-                           name="startyear"
-                           required/>
-                    <label>End Year</label>
-                    <input type="text"
-                           placeholder="YYYY"
-                           id="endDate"
-                           value={this.state.endDate}
-                           onChange={this.handleChange}
-                           name="endyear"
-                           required/>
-                    <input type="submit"/>
-                </form>
+
+                <Form setTerm={this.setTerm}/>
+
             </div>
         );
     }
