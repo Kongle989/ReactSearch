@@ -3,10 +3,11 @@ import axios from 'axios';
 
 const helpers = {
     runQuery: (term, start, end) => {
-
-        axios.get({
-            url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-            qs: {
+        let data = {};
+        let urll = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=new+york+times&page=2&sort=oldest&api-key=6db6c6b8202f4c4981d7c14b2e518663';
+        console.log(term, start, end);
+        return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json",{
+            params: {
                 'api-key': "6db6c6b8202f4c4981d7c14b2e518663",
                 'q': term,
                 'begin_date': start + "0101",
@@ -14,11 +15,13 @@ const helpers = {
                 'sort': "newest",
                 'fl': "web_url,headline,pub_date",
                 'page': 0
-            },
-        }).then((response) => {
-            console.log(response);
-            return response.data.results.formatted;
-        });
+            }
+        }).then(response => {
+            console.log('i am inside helper response');
+            console.log('respponse', response.data.response.docs);
+        }).catch(error => {
+            console.log('error ' + error);
+        })
 
     }
 };

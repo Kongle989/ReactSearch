@@ -1,6 +1,6 @@
 let React = require('react');
 import helpers from '../utils/helpers';
-import Form from 'grandchildren/Form';
+import Form from './grandchildren/Form';
 
 export default class Search extends React.Component {
     constructor(props) {
@@ -11,30 +11,23 @@ export default class Search extends React.Component {
             startDate: "",
             endDate: ""
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
         this.setTerm = this.setTerm.bind(this);
 
     }
 
     componentDidUpdate(prevProps, prevState) {
         console.log('it did update');
-        if (prevState.searchTerm !== this.state.searchTerm ||
-            prevState.startYear !== this.state.startYear ||
-            prevState.endYear !== this.state.endYear) {
-            console.log("UPDATED");
+        if (prevState.term !== this.state.term ||
+            prevState.startDate !== this.state.startDate ||
+            prevState.endDate !== this.state.endDate) {
+            console.log(this.state);
 
             helpers.runQuery(
-                this.state.searchTerm,
-                this.state.startYear,
-                this.state.endYear)
-                .then((data) => {
-                    if (data !== this.state.results) {
-                        console.log(data);
+                this.state.term,
+                this.state.startDate,
+                this.state.endDate);
 
-                        this.setState({results: data});
-                    }
-                });
         }
     }
 

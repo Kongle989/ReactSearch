@@ -9,7 +9,8 @@ import Results from '../components/children/Result';
 
 module.exports = (
     <BrowserRouter>
-        <Route path='/' component={Main}/>
+        <div>
+            <Route path='/' component={Main}/>
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/search">Search</Link></li>
@@ -19,5 +20,6 @@ module.exports = (
             <Route path='/search' component={Search}/>
             <Route path='/saved' component={Saved}/>
             <Route path='/result' component={Results}/>
+        </div>
     </BrowserRouter>
 );
