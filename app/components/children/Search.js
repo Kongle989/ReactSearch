@@ -17,11 +17,9 @@ export default class Search extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('it did update');
         if (prevState.term !== this.state.term ||
             prevState.startDate !== this.state.startDate ||
             prevState.endDate !== this.state.endDate) {
-            console.log(this.state);
 
             helpers.runQuery(
                 this.state.term,

@@ -31,7 +31,6 @@ export default class Form extends React.Component {
             startDate: "",
             endDate: ""
         });
-        console.log('child setterm');
     }
 
     render() {

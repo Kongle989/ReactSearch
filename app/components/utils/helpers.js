@@ -3,9 +3,7 @@ import axios from 'axios';
 
 const helpers = {
     runQuery: (term, start, end) => {
-        let data = {};
-        let urll = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=new+york+times&page=2&sort=oldest&api-key=6db6c6b8202f4c4981d7c14b2e518663';
-        console.log(term, start, end);
+
         return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json",{
             params: {
                 'api-key': "6db6c6b8202f4c4981d7c14b2e518663",
@@ -17,8 +15,14 @@ const helpers = {
                 'page': 0
             }
         }).then(response => {
-            console.log('i am inside helper response');
             console.log('respponse', response.data.response.docs);
+            let title = response.data.response.docs[0].headline.main,
+                pubDate = response.data.response.docs[0].pub_date,
+                url = response.data.response.docs[0].web_url;
+            console.log(title);
+            console.log(pubDate);
+            console.log(url);
+
         }).catch(error => {
             console.log('error ' + error);
         })
