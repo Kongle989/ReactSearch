@@ -1,4 +1,4 @@
-var mongoose = require("mongoose"),
+let mongoose = require("mongoose"),
     Schema = mongoose.Schema,
 
     ArticleSchema = new Schema({
@@ -21,7 +21,7 @@ var mongoose = require("mongoose"),
             required: true
         }
     });
-var Article = mongoose.model("Article", ArticleSchema);
+let Article = mongoose.model("Article", ArticleSchema);
 
 // Export the model
 module.exports = Article;

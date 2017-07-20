@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-
 const helpers = {
     runQuery: (term, start, end) => {
 
-        return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json",{
+        return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json", {
             params: {
                 'api-key': "6db6c6b8202f4c4981d7c14b2e518663",
                 'q': term,
@@ -15,18 +14,26 @@ const helpers = {
                 'page': 0
             }
         }).then(response => {
-            console.log('respponse', response.data.response.docs);
-            let title = response.data.response.docs[0].headline.main,
-                pubDate = response.data.response.docs[0].pub_date,
-                url = response.data.response.docs[0].web_url;
-            console.log(title);
-            console.log(pubDate);
-            console.log(url);
+            let articles = [];
+            response.data.response.docs.forEach(article => {
+                let title = article.headline.main,
+                    pubDate = article.pub_date,
+                    url = article.web_url;
+                articles.push({
+                    title: title,
+                    date: pubDate,
+                    url: url
+                })
 
+            });
+            return articles;
         }).catch(error => {
             console.log('error ' + error);
         })
 
+    },
+    saveData: data => {
+        return axios.post('/article', data);
     }
 };
 

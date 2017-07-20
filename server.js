@@ -3,9 +3,11 @@ let express = require("express"),
     logger = require("morgan"),
     mongoose = require("mongoose"),
     app = express(),
-    url = 'mongodb://localhost/nytreact';
+    url = 'mongodb://localhost/nytreact',
+    articles = require("./models/articles.js");
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 mongoose.Promise = Promise;
 app.use(express.static("public"));
 
@@ -14,10 +16,27 @@ let db = mongoose.connection;
 db.on("error", function (error) {
     console.log("Mongoose Error: ", error);
 });
-db.once("open", function () {
+db.once("open", () => {
     console.log("Mongoose connection successful.");
 });
 
-app.listen(3000, function () {
+app.post('/article', (req, res) => {
+    req.body.forEach(article => {
+        articles
+            .findOneAndUpdate({title: article.title},
+                {
+                    title: article.title,
+                    date: article.date,
+                    url: article.url
+                },
+                {upsert: true})
+    });
+});
+
+app.get('*', (req, res) => {
+    res.redirect('/');
+});
+
+app.listen(3000, () => {
     console.log("App running");
 });
