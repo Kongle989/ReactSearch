@@ -26,7 +26,6 @@ export default class Search extends React.Component {
                 this.state.startDate,
                 this.state.endDate).then(data => {
                 helpers.saveData(data);
-                console.log('whats upppp');
                 this.props.history.push('/result');
             });
         }

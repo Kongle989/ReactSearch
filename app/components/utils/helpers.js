@@ -34,6 +34,12 @@ const helpers = {
     },
     saveData: data => {
         return axios.post('/article', data);
+    },
+    getResult: () => {
+        return axios.get('/getarticles')
+            .then(response => {
+                return response.data;
+            })
     }
 };
 

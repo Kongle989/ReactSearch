@@ -33,6 +33,12 @@ app.post('/article', (req, res) => {
     });
 });
 
+app.get('/getarticles', (req, res) => {
+    articles.find().then(articles => {
+        res.send(articles);
+    });
+});
+
 app.get('*', (req, res) => {
     res.redirect('/');
 });
